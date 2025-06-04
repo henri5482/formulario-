@@ -2,9 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast, Toaster } from 'react-hot-toast'; // Para notificaciones al usuario
+import { toast, Toaster } from 'react-hot-toast';
 
-// Inicializa las fuentes (esto ya lo tienes)
+// Inicializa las fuentes
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -39,62 +39,79 @@ export default function Home() {
 
       const result = await response.json();
 
-      // Manejo de errores basado en la respuesta de la API
       if (!response.ok || result.status === "error") {
         const errorMessage = result.message || "Error desconocido al enviar el formulario.";
-        throw new Error(errorMessage); // Lanza el error para que sea capturado por el catch
+        throw new Error(errorMessage);
       }
 
       toast.success("¡Formulario enviado con éxito! Nos pondremos en contacto pronto.");
-      reset(); // Limpia el formulario solo si el envío fue exitoso
+      reset();
 
     } catch (error) {
       console.error("Error al enviar el formulario:", error.message);
       toast.error(`Hubo un problema al enviar el formulario: ${error.message}`);
     } finally {
-      setLoading(false); // Siempre desactiva el loading al finalizar
+      setLoading(false);
     }
   };
 
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
+      className={`${geistSans.className} ${geistMono.className} relative min-h-screen flex items-center justify-center p-4 sm:p-8 overflow-hidden`}
     >
-      <Toaster position="top-center" reverseOrder={false} /> {/* Componente para mostrar las notificaciones */}
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+      {/* Fondo de Imagen */}
+      <Image
+        src="/nord.jpg" // Asegúrate de que esta ruta sea correcta
+        alt="Fondo de ingeniería"
+        layout="fill"
+        objectFit="cover"
+        quality={90}
+        className="z-0" // Asegura que la imagen esté detrás del contenido
+      />
+
+      {/* Overlay para oscurecer la imagen y mejorar la legibilidad en modo oscuro */}
+      <div className="absolute inset-0 bg-gray-900 opacity-90 z-10"></div> {/* Oscurecido y más opaco */}
+
+      <Toaster position="top-center" reverseOrder={false} />
+
+      <main className="relative z-20 flex flex-col gap-8 items-center w-full max-w-md">
+        <h1 className="text-3xl sm:text-4xl font-bold text-white text-center drop-shadow-lg">
+          Contacto para Ingenieros
+        </h1>
         <form
-          className="border border-neutral-300 p-8 rounded-2xl min-w-2xl"
+          className="bg-gray-800 bg-opacity-90 p-8 rounded-2xl shadow-xl border border-gray-700 w-full"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="mb-2">
-            <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-              Nombre
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-gray-200 text-sm font-semibold mb-2"> {/* Texto más claro */}
+              Nombre Completo
             </label>
             <input
               type="text"
               name="name"
               id="name"
-              placeholder="Ingresa tu nombre"
-              className="py-4 px-6 rounded-lg w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              placeholder="Ej. Juan Pérez"
+              className="py-3 px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out" 
               {...register("name", {
                 required: "El campo nombre es obligatorio",
                 minLength: { value: 2, message: "El nombre debe tener al menos 2 caracteres" }
               })}
             />
             {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+              <p className="text-red-400 text-xs mt-1">{errors.name.message}</p> 
             )}
           </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-              Correo
+
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-gray-200 text-sm font-semibold mb-2"> {/* Texto más claro */}
+              Correo Electrónico Profesional
             </label>
             <input
-              type="email" // Cambiado a type="email" para mejor validación nativa
+              type="email"
               name="email"
               id="email"
-              placeholder="Ingresa tu correo"
-              className="py-4 px-6 rounded-lg w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              placeholder="ejemplo@empresa.com"
+              className="py-3 px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out" 
               {...register("email", {
                 required: "El campo correo es obligatorio",
                 pattern: {
@@ -104,113 +121,109 @@ export default function Home() {
               })}
             />
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red-400 text-xs mt-1"> {/* Rojo más brillante para errores */}
                 {errors.email.message}
               </p>
             )}
           </div>
-          <div className="mb-2">
-            <label htmlFor="phone" className="block text-gray-700 text-sm font-bold mb-2">
-              Teléfono
+
+          <div className="mb-4">
+            <label htmlFor="phone" className="block text-gray-200 text-sm font-semibold mb-2"> {/* Texto más claro */}
+              Teléfono de Contacto
             </label>
             <input
               type="tel"
               name="phone"
               id="phone"
-              placeholder="Ingresa tu celular"
-              className="py-4 px-6 rounded-lg w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              placeholder="+51 987 654 321"
+              className="py-3 px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out" 
               {...register("phone", {
                 required: "El campo teléfono es obligatorio",
-                minLength: { value: 7, message: "El teléfono debe tener al menos 7 dígitos" },
-                maxLength: { value: 15, message: "El teléfono no debe exceder 15 dígitos" },
+                minLength: { value: 9, message: "El teléfono debe tener al menos 9 dígitos" },
+                maxLength: { value: 9, message: "El teléfono no debe exceder 10 dígitos" },
                 pattern: {
-                  value: /^[0-9+() -]*$/, // Permite números, +, paréntesis, guiones y espacios
+                  value: /^[0-9+() -]*$/,
                   message: "Formato de teléfono inválido"
                 }
               })}
             />
             {errors.phone && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red-400 text-xs mt-1"> {/* Rojo más brillante para errores */}
                 {errors.phone.message}
               </p>
             )}
           </div>
-          <div className="mb-2">
-            <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
-              Mensaje
+
+          <div className="mb-6">
+            <label htmlFor="message" className="block text-gray-200 text-sm font-semibold mb-2"> 
+              Describe tu Consulta o Proyecto
             </label>
             <textarea
-              name="message" // Cambiado de 'type="text"' a solo 'name' para textarea
+              name="message"
               id="message"
-              placeholder="Ingresa tu mensaje"
-              rows="5" // Añade filas para que el textarea sea más grande
-              className="py-4 px-6 rounded-lg w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              placeholder="Explica detalladamente tu necesidad o proyecto..."
+              rows="6"
+              className="py-3 px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out resize-y" 
               {...register("message", {
                 required: "El campo mensaje es obligatorio",
-                minLength: { value: 10, message: "El mensaje debe tener al menos 10 caracteres" }
+                minLength: { value: 8, message: "El mensaje debe tener al menos 20 caracteres para ser descriptivo" }
               })}
-            ></textarea> {/* Cierre correcto de textarea */}
+            ></textarea>
             {errors.message && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red-400 text-xs mt-1"> 
                 {errors.message.message}
               </p>
             )}
           </div>
-          <button 
-            type="submit" // Siempre es buena práctica especificar type="submit"
-            className="py-4 px-6 rounded-xl w-full bg-cyan-800 text-white font-bold hover:bg-cyan-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={loading} // Deshabilita el botón mientras se envía el formulario
+
+          <button
+            type="submit"
+            className="py-3 px-6 rounded-xl w-full bg-teal-600 text-white font-bold text-lg hover:bg-teal-500 transition-colors duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" 
+            disabled={loading}
           >
-            {loading ? "Enviando..." : "Enviar"}
+            {loading ? (
+              <>
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Enviando...
+              </>
+            ) : (
+              "Enviar Consulta"
+            )}
           </button>
         </form>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        {/* Tu footer existente */}
+
+      {/* Footer mejorado en modo oscuro */}
+      <footer className="absolute bottom-4 left-0 right-0 z-20 flex gap-6 flex-wrap items-center justify-center text-gray-300 text-sm"> {/* Texto más claro para el footer */}
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 transition-colors duration-200"
+          href="https://nextjs.org/learn"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+          <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} className="filter invert" />
+          Aprende Next.js
         </a>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 transition-colors duration-200"
+          href="https://vercel.com/templates?framework=next.js"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
+          <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} className="filter invert" />
+          Ejemplos
         </a>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 transition-colors duration-200"
+          href="https://nextjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
+          <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} className="filter invert" />
+          nextjs.org
         </a>
       </footer>
     </div>
