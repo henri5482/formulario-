@@ -137,10 +137,7 @@ export default function ContactPage() {
           name="description"
           content="Curso gratuito de análisis de cuencas hidrográficas con QGIS para ingenieros civiles, ambientales "
         />
-        <meta
-          name="google-site-verification"
-          content="s7rwNtOiZLTsTJkm10Dj-B1CNfnpkSjX7iDkXcjEVF4"
-        />
+        <meta name="google-site-verification" content="s7rwNtOiZLTsTJkm10Dj-B1CNfnpkSjX7iDkXcjEVF4" />
         <meta
           name="keywords"
           content="QGIS, Perú, ingeniería civil, cuencas hidrográficas, curso gratuito, ingenieros peruanos,certificado, capacitación, análisis de cuencas, SIG, sistemas de información geográfica"
