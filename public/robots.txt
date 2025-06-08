@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://formulario-iota-swart.vercel.app/sitemap.xml
+
+# Opcional: Bloquear rutas no importantes
+Disallow: /private/
+Disallow: /admin/

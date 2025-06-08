@@ -22,21 +22,23 @@ export default function ContactPage() {
 
   // Inicializar Google Analytics para Perú
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Cargar Google Analytics
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = `https://www.googletagmanager.com/gtag/js?id=G-ZMZN19X7TX`;
       script.async = true;
       document.head.appendChild(script);
 
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
       // Configuración específica para Perú
-      gtag('config', 'G-ZMZN19X7TX', {
-        'country': 'PE',
-        'currency': 'PEN'
+      gtag("config", "G-ZMZN19X7TX", {
+        country: "PE",
+        currency: "PEN",
       });
     }
   }, []);
@@ -64,26 +66,27 @@ export default function ContactPage() {
 
       if (!response.ok || result.status === "error") {
         const errorMessage =
-          result.message || "Error al enviar el formulario. Por favor intente nuevamente.";
+          result.message ||
+          "Error al enviar el formulario. Por favor intente nuevamente.";
         throw new Error(errorMessage);
       }
 
       // Evento de conversión para Facebook Pixel
-      if (typeof window !== 'undefined' && window.fbq) {
-        window.fbq('track', 'CompleteRegistration');
+      if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("track", "CompleteRegistration");
       }
 
       // Eventos de conversión para Google Analytics (Perú)
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'conversion', {
-          'send_to': 'G-ZMZN19X7TX/register',
-          'value': 1.0,
-          'currency': 'PEN'
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "conversion", {
+          send_to: "G-ZMZN19X7TX/register",
+          value: 1.0,
+          currency: "PEN",
         });
-        
-        window.gtag('event', 'form_submit', {
-          'event_category': 'lead',
-          'event_label': 'Formulario de inscripción completado'
+
+        window.gtag("event", "form_submit", {
+          event_category: "lead",
+          event_label: "Formulario de inscripción completado",
         });
       }
 
@@ -107,27 +110,36 @@ export default function ContactPage() {
     const phoneNumber = "51912345678"; // Número peruano (9 dígitos después del 51)
     const message =
       "Hola, estoy interesado en el curso gratuito de análisis de cuencas hidrográficas con QGIS";
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+
     // Evento de Google Analytics para clic en WhatsApp
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'click', {
-        'event_category': 'contact',
-        'event_label': 'WhatsApp Click',
-        'value': 1
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "click", {
+        event_category: "contact",
+        event_label: "WhatsApp Click",
+        value: 1,
       });
     }
-    
+
     window.open(url, "_blank");
   };
 
   return (
     <>
       <Head>
-        <title>Curso de Analisis de cuencas hidrograficas con QGIS| Club de Ingenieros</title>
+        <title>
+          Curso de Analisis de cuencas hidrograficas con QGIS| Club de
+          Ingenieros
+        </title>
         <meta
           name="description"
           content="Curso gratuito de análisis de cuencas hidrográficas con QGIS para ingenieros civiles, ambientales "
+        />
+        <meta
+          name="google-site-verification"
+          content="s7rwNtOiZLTsTJkm10Dj-B1CNfnpkSjX7iDkXcjEVF4"
         />
         <meta
           name="keywords"
@@ -138,7 +150,10 @@ export default function ContactPage() {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://clubdeingenieros.vercel.app/contacto" />
+        <meta
+          property="og:url"
+          content="https://clubdeingenieros.vercel.app/contacto"
+        />
         <meta
           property="og:title"
           content="Curso Gratuito de ANALISIS DE CUENCAS HIDROGRAFICAS CON QGIS"
@@ -154,7 +169,10 @@ export default function ContactPage() {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://clubdeingenieros.vercel.app/contacto" />
+        <meta
+          property="twitter:url"
+          content="https://clubdeingenieros.vercel.app/contacto"
+        />
         <meta
           property="twitter:title"
           content="Curso QGIS para Ingenieros Perú"
@@ -169,13 +187,30 @@ export default function ContactPage() {
         />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://clubdeingenieros.vercel.app/contacto" />
+        <link
+          rel="canonical"
+          href="https://clubdeingenieros.vercel.app/contacto"
+        />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
 
         {/* --- Facebook Pixel --- */}
@@ -268,7 +303,7 @@ export default function ContactPage() {
             <div className="bg-blue-900 bg-opacity-80 p-6 sm:p-8 rounded-xl shadow-xl border border-blue-700 w-full text-white text-center flex flex-col items-center justify-center space-y-6">
               <div className="flex items-center justify-center mb-4">
                 <span className="text-xl sm:text-2xl font-bold">
-                  CLUB DE INGENIEROS 
+                  CLUB DE INGENIEROS
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-yellow-300">
@@ -286,18 +321,20 @@ export default function ContactPage() {
                 type="button"
                 onClick={() => {
                   // Evento de Facebook Pixel para inicio de registro
-                  if (typeof window !== 'undefined' && window.fbq) {
-                    window.fbq('track', 'InitiateCheckout');
+                  if (typeof window !== "undefined" && window.fbq) {
+                    window.fbq("track", "InitiateCheckout");
                   }
                   // Evento de Google Analytics
-                  if (typeof window !== 'undefined' && window.gtag) {
-                    window.gtag('event', 'begin_checkout', {
-                      'currency': 'PEN',
-                      'items': [{
-                        'id': 'curso-qgis-peru',
-                        'name': 'Curso QGIS Perú',
-                        'category': 'Educación'
-                      }]
+                  if (typeof window !== "undefined" && window.gtag) {
+                    window.gtag("event", "begin_checkout", {
+                      currency: "PEN",
+                      items: [
+                        {
+                          id: "curso-qgis-peru",
+                          name: "Curso QGIS Perú",
+                          category: "Educación",
+                        },
+                      ],
                     });
                   }
                   setShowForm(true);
@@ -453,10 +490,16 @@ export default function ContactPage() {
                 >
                   <option value="">Selecciona tu profesión</option>
                   <option value="Ingeniero Civil">Ingeniero Civil</option>
-                  <option value="Ingeniero Ambiental">Ingeniero Ambiental</option>
+                  <option value="Ingeniero Ambiental">
+                    Ingeniero Ambiental
+                  </option>
                   <option value="Ingeniero Agrícola">Ingeniero Agrícola</option>
-                  <option value="Ingeniero Hidráulico">Ingeniero Hidráulico</option>
-                  <option value="Estudiante de Ingeniería">Estudiante de Ingeniería</option>
+                  <option value="Ingeniero Hidráulico">
+                    Ingeniero Hidráulico
+                  </option>
+                  <option value="Estudiante de Ingeniería">
+                    Estudiante de Ingeniería
+                  </option>
                   <option value="Otro">Otro</option>
                 </select>
                 {errors.profession && (
@@ -488,7 +531,9 @@ export default function ContactPage() {
                 className="py-3 px-6 rounded-xl w-full bg-teal-600 text-white font-bold text-lg hover:bg-teal-500 transition-colors duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 disabled={loading}
                 aria-busy={loading}
-                aria-label={loading ? "Enviando formulario" : "Enviar inscripción"}
+                aria-label={
+                  loading ? "Enviando formulario" : "Enviar inscripción"
+                }
               >
                 {loading ? (
                   <>
@@ -534,7 +579,8 @@ export default function ContactPage() {
         {/* Footer con enlaces semánticos y año dinámico */}
         <footer className="bottom-4 left-0 right-0 z-20 flex gap-4 sm:gap-6 flex-wrap items-center justify-center text-gray-300 text-xs sm:text-sm px-4">
           <span className="text-gray-200 text-center mt-2 w-full">
-            © {new Date().getFullYear()} Club de Ingenieros | Todos los derechos reservados.
+            © {new Date().getFullYear()} Club de Ingenieros | Todos los derechos
+            reservados.
           </span>
         </footer>
       </div>
