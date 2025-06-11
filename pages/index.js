@@ -1,18 +1,13 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Open_Sans } from "next/font/google"; // Importamos Open Sans
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 
-// Inicializa las fuentes
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Inicializa la fuente Open Sans
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
 });
 
@@ -267,7 +262,7 @@ export default function ContactPage() {
       </noscript>
 
       <div
-        className={`${geistSans.className} ${geistMono.className} relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 overflow-hidden`}
+        className={`${openSans.className} relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 overflow-hidden`}
       >
         {/* Fondo de Imagen con temática peruana */}
         <Image
@@ -301,18 +296,14 @@ export default function ContactPage() {
           {/* Contenido de la tarjeta */}
           {!showForm && (
             <div className="bg-blue-900 bg-opacity-80 p-6 sm:p-8 rounded-xl shadow-xl border border-blue-700 w-full text-white text-center flex flex-col items-center justify-center space-y-6">
-              <div className="flex items-center justify-center mb-4">
-                <span className="text-xl sm:text-2xl font-bold">
-                  CLUB DE INGENIEROS
-                </span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-yellow-300">
+
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-yellow-300 tracking-wider">
                 CURSO GRATUITO
               </h2>
-              <p className="text-lg sm:text-xl leading-relaxed text-gray-200">
+              <p className="text-xl sm:text-[32px] leading-relaxed font-bold text-white">
                 ANÁLISIS DE CUENCAS HIDROGRÁFICAS CON QGIS
               </p>
-              <p className="text-sm sm:text-base text-gray-300">
+              <p className="text-lg sm:text-xl text-white">
                 REGÍSTRATE PARA PARTICIPAR DE FORMA GRATUITA EN LAS
                 TRANSMISIONES EN VIVO{" "}
               </p>
@@ -340,46 +331,29 @@ export default function ContactPage() {
                   }
                   setShowForm(true);
                 }}
-                className="cursor-pointer py-3 px-8 rounded-xl bg-yellow-500 text-blue-900 font-extrabold text-xl sm:text-2xl hover:bg-yellow-400 transition-colors duration-300 ease-in-out shadow-lg transform hover:scale-105"
+                className="cursor-pointer py-5 px-12 rounded-xl bg-yellow-500 hover:bg-red-400 text-blue-900 font-extrabold text-3xl sm:text-4xl  transition-colors duration-300 ease-in-out shadow-lg transform hover:scale-105"
                 aria-label="Inscríbete gratis al curso"
               >
                 INSCRÍBETE GRATIS
               </button>
-
-              {/* Botón de WhatsApp alternativo */}
-              {/* <button
-                onClick={openWhatsApp}
-                className="flex items-center justify-center gap-2 py-2 px-6 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 transition-colors duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
-                </svg>
-                Contáctanos por WhatsApp
-              </button> */}
             </div>
           )}
 
           {/* Formulario que se muestra condicionalmente */}
           {showForm && (
             <form
-              className="bg-blue-900 bg-opacity-90 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-700 w-full"
+              className="bg-blue-900 bg-opacity-90 p-6 sm:p-8 rounded-2xl shadow-xl border border-teal-400 w-full animate-fadeIn"
               onSubmit={handleSubmit(onSubmit)}
               aria-label="Formulario de inscripción al curso QGIS Perú"
             >
-              <p className="text-md sm:text-xl font-bold text-gray-300 text-center px-4 mb-6">
+              <p className="text-xl sm:text-2xl font-bold text-white text-center px-4 mb-6">
                 Completa tus datos para inscribirte al curso gratuito.
               </p>
 
               <div className="mb-4">
                 <label
                   htmlFor="name"
-                  className="block text-gray-200 text-sm font-semibold mb-2"
+                  className="block text-white text-lg font-semibold mb-2"
                 >
                   Nombre Completo
                 </label>
@@ -388,7 +362,7 @@ export default function ContactPage() {
                   name="name"
                   id="name"
                   placeholder="Ej. Juan Pérez"
-                  className="py-2 px-4 sm:py-3 sm:px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out"
+                  className="py-3.5 px-5 sm:py-4 sm:px-6 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out text-base sm:text-lg"
                   aria-required="true"
                   aria-invalid={errors.name ? "true" : "false"}
                   {...register("name", {
@@ -400,7 +374,7 @@ export default function ContactPage() {
                   })}
                 />
                 {errors.name && (
-                  <p className="text-red-400 text-xs mt-1" role="alert">
+                  <p className="text-red-400 text-sm mt-1" role="alert">
                     {errors.name.message}
                   </p>
                 )}
@@ -409,7 +383,7 @@ export default function ContactPage() {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block text-gray-200 text-sm font-semibold mb-2"
+                  className="block text-white text-lg font-semibold mb-2"
                 >
                   Correo Electrónico
                 </label>
@@ -418,7 +392,7 @@ export default function ContactPage() {
                   name="email"
                   id="email"
                   placeholder="ejemplo@correo.com"
-                  className="py-2 px-4 sm:py-3 sm:px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out"
+                  className="py-3.5 px-5 sm:py-4 sm:px-6 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out text-base sm:text-lg"
                   aria-required="true"
                   aria-invalid={errors.email ? "true" : "false"}
                   {...register("email", {
@@ -430,7 +404,7 @@ export default function ContactPage() {
                   })}
                 />
                 {errors.email && (
-                  <p className="text-red-400 text-xs mt-1" role="alert">
+                  <p className="text-red-400 text-sm mt-1" role="alert">
                     {errors.email.message}
                   </p>
                 )}
@@ -439,7 +413,7 @@ export default function ContactPage() {
               <div className="mb-4">
                 <label
                   htmlFor="phone"
-                  className="block text-gray-200 text-sm font-semibold mb-2"
+                  className="block text-white text-lg font-semibold mb-2"
                 >
                   Ingresa tu WhatsApp para poder enviarte el enlace del Zoom{" "}
                 </label>
@@ -448,7 +422,7 @@ export default function ContactPage() {
                   name="phone"
                   id="phone"
                   placeholder="Ej. 987654321"
-                  className="py-2 px-4 sm:py-3 sm:px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out"
+                  className="py-3.5 px-5 sm:py-4 sm:px-6 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out text-base sm:text-lg"
                   aria-required="true"
                   aria-invalid={errors.phone ? "true" : "false"}
                   {...register("phone", {
@@ -468,69 +442,32 @@ export default function ContactPage() {
                   })}
                 />
                 {errors.phone && (
-                  <p className="text-red-400 text-xs mt-1" role="alert">
+                  <p className="text-red-400 text-sm mt-1" role="alert">
                     {errors.phone.message}
                   </p>
                 )}
               </div>
 
-              {/* <div className="mb-6">
-                <label
-                  htmlFor="profession"
-                  className="block text-gray-200 text-sm font-semibold mb-2"
-                >
-                  Profesión
-                </label>
-                <select
-                  name="profession"
-                  id="profession"
-                  className="py-2 px-4 sm:py-3 sm:px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out"
-                  {...register("profession", {
-                    required: "Por favor selecciona tu profesión",
-                  })}
-                >
-                  <option value="">Selecciona tu profesión</option>
-                  <option value="Ingeniero Civil">Ingeniero Civil</option>
-                  <option value="Ingeniero Ambiental">
-                    Ingeniero Ambiental
-                  </option>
-                  <option value="Ingeniero Agrícola">Ingeniero Agrícola</option>
-                  <option value="Ingeniero Hidráulico">
-                    Ingeniero Hidráulico
-                  </option>
-                  <option value="Estudiante de Ingeniería">
-                    Estudiante de Ingeniería
-                  </option>
-                  <option value="Otro">Otro</option>
-                </select>
-                {errors.profession && (
-                  <p className="text-red-400 text-xs mt-1" role="alert">
-                    {errors.profession.message}
-                  </p>
-                )}
-              </div> */}
-
               <div className="mb-6">
                 <label
                   htmlFor="message"
-                  className="block text-gray-200 text-sm font-semibold mb-2"
+                  className="block text-white text-lg font-semibold mb-2"
                 >
-                  ¿Te gustaría adquirir el certificado digital y beneficios
-                  VIP?{" "}
+                  ¿Te gustaría adquirir el certificado digital y beneficios VIP?{" "}
                 </label>
                 <textarea
                   name="message"
                   id="message"
                   placeholder="Responde (Si deseo O No deseo )"
                   rows="3"
-                  className="py-2 px-4 sm:py-3 sm:px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out resize-y"
+                  className="py-3.5 px-5 sm:py-4 sm:px-6 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out resize-y text-base sm:text-lg"
                   {...register("message")}
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="py-3 px-6 rounded-xl w-full bg-teal-600 text-white font-bold text-lg hover:bg-teal-500 transition-colors duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="py-4 px-8 rounded-xl w-full bg-teal-600 text-white font-bold text-xl hover:bg-teal-500 transition-colors duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 disabled={loading}
                 aria-busy={loading}
                 aria-label={
@@ -567,15 +504,15 @@ export default function ContactPage() {
                 )}
               </button>
 
-              <h1 className="text-center pt-2">
-                Solo contamos con cupos limitados 
-              </h1>
+              <p className="text-lg sm:text-xl text-center text-yellow-300 font-semibold mt-4">
+                Solo contamos con cupos limitados
+              </p>
             </form>
           )}
         </main>
 
         {/* Footer con enlaces semánticos y año dinámico */}
-        <footer className="bottom-4 left-0 right-0 z-20 flex gap-4 sm:gap-6 flex-wrap items-center justify-center text-gray-300 text-xs sm:text-sm px-4">
+        <footer className="bottom-4 left-0 right-0 z-20 flex gap-4 sm:gap-6 flex-wrap items-center justify-center text-gray-300 text-sm sm:text-base px-4">
           <span className="text-gray-200 text-center mt-2 w-full">
             © {new Date().getFullYear()} Club de Ingenieros | Todos los derechos
             reservados.
