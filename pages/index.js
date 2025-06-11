@@ -137,7 +137,10 @@ export default function ContactPage() {
           name="description"
           content="Curso gratuito de análisis de cuencas hidrográficas con QGIS para ingenieros civiles, ambientales "
         />
-        <meta name="google-site-verification" content="s7rwNtOiZLTsTJkm10Dj-B1CNfnpkSjX7iDkXcjEVF4" />
+        <meta
+          name="google-site-verification"
+          content="s7rwNtOiZLTsTJkm10Dj-B1CNfnpkSjX7iDkXcjEVF4"
+        />
         <meta
           name="keywords"
           content="QGIS, Perú, ingeniería civil, cuencas hidrográficas, curso gratuito, ingenieros peruanos,certificado, capacitación, análisis de cuencas, SIG, sistemas de información geográfica"
@@ -310,7 +313,8 @@ export default function ContactPage() {
                 ANÁLISIS DE CUENCAS HIDROGRÁFICAS CON QGIS
               </p>
               <p className="text-sm sm:text-base text-gray-300">
-                Capacitación especializada para ingenieros peruanos
+                REGÍSTRATE PARA PARTICIPAR DE FORMA GRATUITA EN LAS
+                TRANSMISIONES EN VIVO{" "}
               </p>
 
               {/* Botón principal de inscripción */}
@@ -437,7 +441,7 @@ export default function ContactPage() {
                   htmlFor="phone"
                   className="block text-gray-200 text-sm font-semibold mb-2"
                 >
-                  Teléfono/Celular
+                  Ingresa tu WhatsApp para poder enviarte el enlace del Zoom{" "}
                 </label>
                 <input
                   type="tel"
@@ -470,7 +474,7 @@ export default function ContactPage() {
                 )}
               </div>
 
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <label
                   htmlFor="profession"
                   className="block text-gray-200 text-sm font-semibold mb-2"
@@ -504,19 +508,20 @@ export default function ContactPage() {
                     {errors.profession.message}
                   </p>
                 )}
-              </div>
+              </div> */}
 
               <div className="mb-6">
                 <label
                   htmlFor="message"
                   className="block text-gray-200 text-sm font-semibold mb-2"
                 >
-                  ¿Qué esperas aprender en este curso? (Opcional)
+                  ¿Te gustaría adquirir el certificado digital y beneficios
+                  VIP?{" "}
                 </label>
                 <textarea
                   name="message"
                   id="message"
-                  placeholder="Escribe tus expectativas..."
+                  placeholder="Responde (Si deseo O No deseo )"
                   rows="3"
                   className="py-2 px-4 sm:py-3 sm:px-5 rounded-lg w-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-200 ease-in-out resize-y"
                   {...register("message")}
@@ -562,13 +567,9 @@ export default function ContactPage() {
                 )}
               </button>
 
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-                className="mt-4 py-2 px-6 rounded-xl w-full bg-gray-600 text-white font-bold text-md hover:bg-gray-500 transition-colors duration-300 ease-in-out"
-              >
-                Volver
-              </button>
+              <h1 className="text-center pt-2">
+                Solo contamos con cupos limitados 
+              </h1>
             </form>
           )}
         </main>
